@@ -1,0 +1,18 @@
+.TodoItem {
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  color: #4d4d4d;
+  padding: 10px 5px;
+  border: 1px solid #bebebe;
+  display: flex;
+}
+
+.TodoItem > p {
+  margin: 0 0 0 10px;
+}
+
+.TodoItem-completed {
+  text-decoration: line-through;
+  opacity: 0.3;
+}
