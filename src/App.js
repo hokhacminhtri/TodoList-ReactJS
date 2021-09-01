@@ -7,12 +7,6 @@ class App extends Component {
     super();
     this.state = {
       newItem: "",
-      // todoItems: [
-      //   // { title: "Ăn", isCompleted: true },
-      //   // { title: "Ngủ", isCompleted: true },
-      //   // { title: "Code", isCompleted: false },
-
-      // ],
 
       todoItems: window.localStorage.getItem("items")
         ? JSON.parse(window.localStorage.getItem("items"))
@@ -23,7 +17,6 @@ class App extends Component {
   }
 
   onItemClicked = (item) => {
-    // console.log(localStorage.getItem("title"));
     const isCompleted = item.isCompleted;
     const { todoItems } = this.state;
     const index = todoItems.indexOf(item);
@@ -37,11 +30,12 @@ class App extends Component {
         ...todoItems.slice(index + 1),
       ],
     });
+
+    // window.localStorage.setItem("items", JSON.stringify(this.state.todoItems));
   };
 
   onKeyUp(event) {
     if (event.keyCode === 13) {
-      console.log("1111");
       let text = event.target.value;
       if (!text) {
         return;
@@ -60,10 +54,13 @@ class App extends Component {
         ],
       });
 
-      window.localStorage.setItem(
-        "items",
-        JSON.stringify(this.state.todoItems)
-      );
+      console.log(this.state.todoItems);
+      console.log(text);
+
+      // window.localStorage.setItem(
+      //   "items",
+      //   JSON.stringify(this.state.todoItems)
+      // );
     }
   }
 
@@ -74,6 +71,7 @@ class App extends Component {
   }
 
   renderTodoList() {
+    window.localStorage.setItem("items", JSON.stringify(this.state.todoItems));
     return this.state.todoItems.length ? (
       this.state.todoItems.map((item, index) => (
         <TodoItem
