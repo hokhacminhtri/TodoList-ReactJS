@@ -16,6 +16,7 @@ class App extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  // danh dau hoan thanh
   onItemClicked = (item) => {
     const isCompleted = item.isCompleted;
     const { todoItems } = this.state;
@@ -30,10 +31,9 @@ class App extends Component {
         ...todoItems.slice(index + 1),
       ],
     });
-
-    // window.localStorage.setItem("items", JSON.stringify(this.state.todoItems));
   };
 
+  // nhap cong viec
   onKeyUp(event) {
     if (event.keyCode === 13) {
       let text = event.target.value;
@@ -56,13 +56,15 @@ class App extends Component {
 
       console.log(this.state.todoItems);
       console.log(text);
-
-      // window.localStorage.setItem(
-      //   "items",
-      //   JSON.stringify(this.state.todoItems)
-      // );
     }
   }
+
+  // xoa cong viec
+  onItemRemoved = (item) => {
+    this.state.todoItems.splice(item, 1);
+    this.setState({ todoItems: this.state.todoItems });
+    console.log(this.state.todoItems);
+  };
 
   onChange(event) {
     this.setState({
@@ -74,11 +76,15 @@ class App extends Component {
     window.localStorage.setItem("items", JSON.stringify(this.state.todoItems));
     return this.state.todoItems.length ? (
       this.state.todoItems.map((item, index) => (
-        <TodoItem
-          key={index}
-          item={item}
-          onClick={() => this.onItemClicked(item)}
-        />
+        <li key={index}>
+          <TodoItem
+            key={index}
+            item={item}
+            onClick={() => this.onItemClicked(item)}
+            // onClick={() => this.removeItem(item)}
+          />
+          <button onClick={() => this.onItemRemoved(index)}>X</button>
+        </li>
       ))
     ) : (
       <React.Fragment>EMPTY</React.Fragment>

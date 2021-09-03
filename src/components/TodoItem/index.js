@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./TodoItem.css";
-import checkImg from "../img/check.svg";
-import checkCompletedImg from "../img/check-completed.svg";
+import "./index.css";
+import checkImg from "../../img/check.svg";
+import checkCompletedImg from "../../img/check-completed.svg";
 
 class TodoItem extends Component {
   render() {
