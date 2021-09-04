@@ -7,10 +7,10 @@ class App extends Component {
     super();
     this.state = {
       newItem: "",
-
       todoItems: window.localStorage.getItem("items")
         ? JSON.parse(window.localStorage.getItem("items"))
         : [],
+      currentFilter: [],
     };
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -66,6 +66,31 @@ class App extends Component {
     console.log(this.state.todoItems);
   };
 
+  statusHandler = (e) => {
+    console.log(e.target.value);
+  };
+
+  // filter all
+  onFilterAll = () => {
+    this.setState({
+      currentFilter: [...this.state.todoItems],
+    });
+  };
+
+  // filter completed
+  onFilterCompleted = () => {
+    this.setState({
+      currentFilter: this.state.todoItems.filter((todo) => todo.isCompleted),
+    });
+  };
+
+  // filter uncompleted
+  onFilterUncompleted = () => {
+    this.setState({
+      currentFilter: this.state.todoItems.filter((todo) => !todo.isCompleted),
+    });
+  };
+
   onChange(event) {
     this.setState({
       newItem: event.target.value,
@@ -76,14 +101,32 @@ class App extends Component {
     window.localStorage.setItem("items", JSON.stringify(this.state.todoItems));
     return this.state.todoItems.length ? (
       this.state.todoItems.map((item, index) => (
+        <div>
+          <li key={index}>
+            <TodoItem
+              key={index}
+              item={item}
+              onClick={() => this.onItemClicked(item)}
+            />
+            <button onClick={() => this.onItemRemoved(index)}>X</button>
+          </li>
+        </div>
+      ))
+    ) : (
+      <React.Fragment>EMPTY</React.Fragment>
+    );
+  }
+
+  renderCurrentTodoList() {
+    window.localStorage.setItem("items", JSON.stringify(this.state.todoItems));
+    return this.state.currentFilter.length ? (
+      this.state.currentFilter.map((item, index) => (
         <li key={index}>
           <TodoItem
             key={index}
             item={item}
             onClick={() => this.onItemClicked(item)}
-            // onClick={() => this.removeItem(item)}
           />
-          <button onClick={() => this.onItemRemoved(index)}>X</button>
         </li>
       ))
     ) : (
@@ -92,6 +135,9 @@ class App extends Component {
   }
 
   render() {
+    const todo = this.state.currentFilter;
+    console.log("current", todo);
+
     return (
       <div className="App">
         <div className="Header">
@@ -105,6 +151,27 @@ class App extends Component {
           ></input>
         </div>
         {this.renderTodoList()}
+        <div>
+          <button
+            className="filter-button"
+            onClick={() => this.onFilterAll(this.state.currentFilter)}
+          >
+            All
+          </button>
+          <button
+            className="filter-button"
+            onClick={() => this.onFilterCompleted(this.state.currentFilter)}
+          >
+            Completed
+          </button>
+          <button
+            className="filter-button"
+            onClick={() => this.onFilterUncompleted(this.state.currentFilter)}
+          >
+            Uncompleted
+          </button>
+        </div>
+        {this.renderCurrentTodoList()}
       </div>
     );
   }
