@@ -3,11 +3,13 @@
   margin-left: auto;
   margin-right: auto;
   border: solid 1px #eee;
+  box-shadow: 20px 20px 10px #c3c3c3;
 }
 
 .App .Header {
   padding: 10px 5px;
   display: flex;
+  border-style: 1px solid #c3c3c3;
 }
 
 .App .Header input {
@@ -17,10 +19,16 @@
   width: 100%;
   margin-left: 10px;
   border: none;
+  opacity: 1;
 }
 
 .App .Header input:focus {
   outline: none;
+  opacity: 1;
+}
+
+.App .Header input::placeholder {
+  opacity: 0.3;
 }
 
 .App-logo {
@@ -56,4 +64,49 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  color: #c3c3c3;
+}
+
+.App li {
+  display: flex;
+  justify-content: space-between;
+  word-break: break-all; /* xuong dong, khong bi tran */
+}
+
+/* === remove button === */
+.App .remove-button {
+  transition-duration: 0.4s;
+  background: none;
+  border: none;
+  width: 5%;
+  font-weight: 900;
+}
+
+.App .remove-button:hover {
+  color: #c3c3c3;
+}
+
+/* === filter button === */
+.App .Filter {
+  display: flex;
+  justify-content: center;
+}
+
+.App .filter-button {
+  background-color: #c3c3c3;
+  text-align: center;
+  margin-right: 25px;
+  color: #fff;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

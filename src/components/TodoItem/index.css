@@ -6,10 +6,12 @@
   padding: 10px 5px;
   border: 1px solid #bebebe;
   display: flex;
+  border-style: none;
 }
 
 .TodoItem > p {
   margin: 0 0 0 10px;
+  display: inline-block;
 }
 
 .TodoItem-completed {

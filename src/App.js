@@ -108,7 +108,12 @@ class App extends Component {
               item={item}
               onClick={() => this.onItemClicked(item)}
             />
-            <button onClick={() => this.onItemRemoved(index)}>X</button>
+            <button
+              className="remove-button"
+              onClick={() => this.onItemRemoved(index)}
+            >
+              X
+            </button>
           </li>
         </div>
       ))
@@ -140,6 +145,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1>TodoList-App</h1>
         <div className="Header">
           <img src={tick} width={32}></img>
           <input
@@ -151,7 +157,7 @@ class App extends Component {
           ></input>
         </div>
         {this.renderTodoList()}
-        <div>
+        <div className="Filter">
           <button
             className="filter-button"
             onClick={() => this.onFilterAll(this.state.currentFilter)}
